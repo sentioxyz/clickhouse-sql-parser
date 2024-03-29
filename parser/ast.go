@@ -3925,8 +3925,23 @@ func (f *FromExpr) End() Pos {
 func (f *FromExpr) String(level int) string {
 	var builder strings.Builder
 	builder.WriteString("FROM")
+
+	isSubquery := false
+	joinTableExpr, ok := f.Expr.(*JoinTableExpr)
+	if ok && joinTableExpr.Table != nil {
+		_, ok := joinTableExpr.Table.Expr.(*SelectQuery)
+		if ok {
+			isSubquery = true
+		}
+	}
+	if isSubquery {
+		builder.WriteString(" (")
+	}
 	builder.WriteString(NewLine(level + 1))
 	builder.WriteString(f.Expr.String(level + 1))
+	if isSubquery {
+		builder.WriteString(")")
+	}
 	return builder.String()
 }
 
