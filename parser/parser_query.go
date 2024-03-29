@@ -788,8 +788,6 @@ func (p *Parser) parseSelectStatement(pos Pos) (*SelectQuery, error) { // nolint
 	if err := p.consumeKeyword(KeywordSelect); err != nil {
 		return nil, err
 	}
-	// DISTINCT?
-	_ = p.tryConsumeKeyword(KeywordDistinct)
 
 	topExpr, err := p.tryParseTopExpr(p.Pos())
 	if err != nil {

@@ -4604,6 +4604,9 @@ func (s *SelectQuery) String(level int) string { // nolint: funlen
 		builder.WriteString(s.Top.String(level))
 		builder.WriteString(" ")
 	}
+	if s.SelectColumns.HasDistinct {
+		builder.WriteString("DISTINCT ")
+	}
 	columns := s.SelectColumns.Items
 	for i, column := range columns {
 		builder.WriteString(NewLine(level + 1))
