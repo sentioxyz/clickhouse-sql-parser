@@ -2462,12 +2462,7 @@ func (f *ParamExprList) End() Pos {
 func (f *ParamExprList) String(level int) string {
 	var builder strings.Builder
 	builder.WriteString("(")
-	for i, item := range f.Items.Items {
-		if i > 0 {
-			builder.WriteString(", ")
-		}
-		builder.WriteString(item.String(level))
-	}
+	builder.WriteString(f.Items.String(level))
 	builder.WriteString(")")
 	return builder.String()
 }
@@ -2503,12 +2498,7 @@ func (a *ArrayParamList) End() Pos {
 func (a *ArrayParamList) String(level int) string {
 	var builder strings.Builder
 	builder.WriteString("[")
-	for i, item := range a.Items.Items {
-		if i > 0 {
-			builder.WriteString(", ")
-		}
-		builder.WriteString(item.String(level))
-	}
+	builder.WriteString(a.Items.String(level))
 	builder.WriteString("]")
 	return builder.String()
 }
